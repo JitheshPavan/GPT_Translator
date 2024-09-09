@@ -27,8 +27,11 @@ Attention is used to capture the relations between different tokens or words in 
 1)Although the transformer can handle different sequence lengths, it is advisable to use the same sequence length in a batch; this makes it easier to train it using GPUs. Such a padded sequence should not be considered, so we introduce padding_mask. This is after the Q.dot(K) mechanism sets all the padded values in the sequence to -infinity. exponential of -infinity is zero, thus removing it from softmax calculations. 
 
 2) "Look-Ahead Mask"-->This preserves auto-regressive property. The transformer generates a single new token for every turn during inference or generation. The transformer( decoder in particular) can only access the tokens it has generated before. This property must be mimicked during training, so we added a look-ahead mask. During the output calculations, queries should not access any keys of the future token. So, we add a look-ahead mask. The upper triangular mask with infinity for every non-zero value acts as the mask. The look-ahead mask remains an upper triangular matrix, but the size increases with every new token generation. The token generated is added to the input during the next generation cycle.
-   What does a look_ahead mask + adding mask looks like?
-   Ex: sequence=[1,2,0,0,0] , then mask will look like=[[T1,T2,0 0,0],[T3,T2,0,0,0],-----]. This mask used during the first Attention block in Decoder
+
+3) The encoder only requires a padding mask. In a Decoderblock, the first Attention block requires a look_ahead and padded mask. The second block requires only a padded mask. A look-ahead mask should not be used because keys come from the encoder. Let us use the machine translation task to understand this- Transformer will always have access to the complete sentence that needs to be translated. This sentence is fed into the encoder.
+
+What does a look_ahead mask + adding mask looks like?
+Ex: sequence=[1,2,0,0,0] , then mask will look like=[[T1,T2,0 0,0],[T3,T2,0,0,0],-----]. This mask used during the first Attention block in Decoder
 
 ## MultiHead Attention:
 
