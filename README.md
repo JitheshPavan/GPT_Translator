@@ -15,7 +15,8 @@ Attention is used to capture the relations between different tokens or words in 
 
 4) softmax(Q.dot(K.Transpose())) * V. What does this do? [T, T] * [T, Embedding_dim] ==> [T, embedding_dim]. We have the original input dimensions back.  
    softmax([[Q1*K1, Q1*K2, Q1*K3]]) * ([[V1], [V2], [V3]]) = [V1[1]*p(Q1*K1) + V2[1]*p(Q1*K2) + V3[1]*p(Q1*K3), V1[2]*p(Q1*K1) + V2[2]*p(Q1*K2) + V3[2]*p(Q1*K3), ...]  
-   Thus, we end up with a convex linear combination of individual scalars of values vector.  
+   Thus, we end up with a convex linear combination of individual scalars of values vector.
+   
 **Note**
 - What happens if we do (V.Transpose * softmax(Q.dot(K.Transpose))).Transpose. This will reverse the functions of Queries and keys. 
 - How do different sequence lengths come into the picture? One sequence functions as the query, and one as the keys. [T1,E] * [E,T2] ==> [T1,T2]. Then [T1,T2] * [T2,E] ==> [T1,E]. Thus, the T1 is preserved. To preserve the dimension of output, the values and keys matrix are provided by the sequence, which acts as the context or encoder rather than the decoder.  
@@ -30,7 +31,7 @@ Attention is used to capture the relations between different tokens or words in 
 
 3) The encoder only requires a padding mask. In a Decoderblock, the first Attention block requires a look_ahead and padded mask. The second block requires only a padded mask. A look-ahead mask should not be used because keys come from the encoder. Let us use the machine translation task to understand this- Transformer will always have access to the complete sentence that needs to be translated. This sentence is fed into the encoder.
 
-What does a look_ahead mask + adding mask looks like?
+What does a look_ahead mask + padding mask looks like?
 Ex: sequence=[1,2,0,0,0] , then mask will look like=[[T1,T2,0 0,0],[T3,T2,0,0,0],-----]. This mask used during the first Attention block in Decoder
 
 ## MultiHead Attention:
