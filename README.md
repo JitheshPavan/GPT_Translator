@@ -25,7 +25,7 @@ Attention is used to capture the relations between different tokens or words in 
 - Why have a values vector? Why not do the linear combination of the vectors itself? Attention * X instead of V?
 
  ## Masking
-1)Although the transformer can handle different sequence lengths, it is advisable to use the same sequence length in a batch; this makes it easier to train it using GPUs. Such a padded sequence should not be considered, so we introduce padding_mask. This is after the Q.dot(K) mechanism sets all the padded values in the sequence to -infinity. exponential of -infinity is zero, thus removing it from softmax calculations. 
+1) Although the transformer can handle different sequence lengths, it is advisable to use the same sequence length in a batch; this makes it easier to train it using GPUs. Such a padded sequence should not be considered, so we introduce padding_mask. This is after the Q.dot(K) mechanism sets all the padded values in the sequence to -infinity. exponential of -infinity is zero, thus removing it from softmax calculations. 
 
 2) "Look-Ahead Mask"-->This preserves auto-regressive property. The transformer generates a single new token for every turn during inference or generation. The transformer( decoder in particular) can only access the tokens it has generated before. This property must be mimicked during training, so we added a look-ahead mask. During the output calculations, queries should not access any keys of the future token. So, we add a look-ahead mask. The upper triangular mask with infinity for every non-zero value acts as the mask. The look-ahead mask remains an upper triangular matrix, but the size increases with every new token generation. The token generated is added to the input during the next generation cycle.
 
