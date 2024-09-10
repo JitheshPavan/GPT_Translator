@@ -31,8 +31,19 @@ Attention is used to capture the relations between different tokens or words in 
 
 3) The encoder only requires a padding mask. In a Decoderblock, the first Attention block requires a look_ahead and padded mask. The second block requires only a padded mask. A look-ahead mask should not be used because keys come from the encoder. Let us use the machine translation task to understand this- Transformer will always have access to the complete sentence that needs to be translated. This sentence is fed into the encoder.
 
-What does a look_ahead mask + padding mask looks like?
-Ex: sequence=[1,2,0,0,0] , then mask will look like=[[T1,T2,0 0,0],[T3,T2,0,0,0],-----]. This mask used during the first Attention block in Decoder
+What does a look_ahead mask + padding mask look like?
+Ex: sequence=[1,2,0,0,0] , then mask will look like=[[T1,T2,0 0,0],[T3,T2,0,0,0],-----]. This mask is used during the first Attention block in the Decoder
 
 ## MultiHead Attention:
 
+MultiHead Attention, as the name suggests, multiple attention is done in parallel. I would like to do that. Keys, queries, and values received from the input are indexed into distinct matrices in the embedding dimensions. Attention is carried out individually in every set of matrices. 
+Thus, with the same computational complexity, we can capture context many times. At the end, the output matrices are combined to achieve the same output. The main point here is that K, Q, and V are indexed in the embedding dim, not the context/time/token dimension. This preserves the ability to access every context.
+
+## Transformer
+
+### Encoder
+The encoder consists of attention and FFNN with residual and layer norm connections. We start with the attention block, which acts as the residual input to the input. Layernorm is applied to the output(x+attention(x)). Then, FFNN is applied as another residual connection with another layer of the norm layer at the end. The FFNN consists of two linear layers. One maps emb_dim to 4* emb_dim, and the layer maps it back to the original dimension. The encoder part is used for the input if we have eng to ger translation. Eng sentence is the input to Encoder. The encoder thus does not require a look_ahead mask as the whole eng sentence should be accessed for translation in every German token generation. Dropout is added after every sub-layer, that is, after the attention and FFNN layer.
+
+### Decoder 
+
+The decoder works in the same manner except for an MHA layer in between, which receives the keys and values from the encoder. If we are to implement a text generation model without any input whatsoever, then we would not need an encoder, and thus, the transformer/decoder block would more resemble an encoder. 
