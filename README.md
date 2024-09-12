@@ -56,3 +56,17 @@ The decoder works in the same manner except for an MHA layer in between, which r
 The learning rate increases with warm-up steps and then gradually decreases. The bigger the warmup rate, the smaller the slope and peak in the lr. 
 With increased dimension of the model, the learning rate decreases. It decreases by 10 points for every 100 increase in dimension. 
 <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/learning_rate.png" width="800" height="500">
+
+### Inputs
+The transformer predicts one token at a time. Suppose we have decoder input as "<Start> How are you? <END>". Decoder input and output follow this pattern. 
+
+First iteration="<START>" --> "How".
+
+Second Iteration="<START> How" --> "are". 
+
+Third Iteration ="<START> How are" --> "you?"
+
+Fourth Iteration= "<START> How are you" -->""<END>"
+
+So, we need to shift our decoder output expectation to the right. Thus, we get for a token of 5, 4 examples.
+
