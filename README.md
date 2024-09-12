@@ -51,7 +51,8 @@ The decoder works in the same manner except for an MHA layer in between, which r
 
 ## Learning Rate
 
-![alt text](https://github.com/JitheshPavan/GPT_Translator/blob/main/data/lr_formula.PNG)
+![](https://github.com/JitheshPavan/GPT_Translator/blob/main/data/lr_formula.PNG)
+
 The learning rate increases with warm-up steps and then gradually decreases. The bigger the warmup rate, the smaller the slope and peak in the lr. 
 With increased dimension of the model, the learning rate decreases. It decreases by 10 points for every 100 increase in dimension. 
-![alt text](https://github.com/JitheshPavan/GPT_Translator/blob/main/data/learning_rate.png)
+<img src="(https://github.com/JitheshPavan/GPT_Translator/blob/main/data/learning_rate.png" width="100" height="100">
