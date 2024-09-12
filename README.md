@@ -47,3 +47,9 @@ The encoder consists of attention and FFNN with residual and layer norm connecti
 ### Decoder 
 
 The decoder works in the same manner except for an MHA layer in between, which receives the keys and values from the encoder. If we are to implement a text generation model without any input whatsoever, then we would not need an encoder, and thus, the transformer/decoder block would more resemble an encoder. 
+
+
+## Learning Rate
+
+![alt text](https://github.com/JitheshPavan/GPT_Translator/blob/main/data/lr_formula.PNG)
+
