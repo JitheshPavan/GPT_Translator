@@ -58,15 +58,21 @@ With increased dimension of the model, the learning rate decreases. It decreases
 <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/learning_rate.png" width="800" height="500">
 
 ### Inputs
-The transformer predicts one token at a time. Suppose we have decoder input as "<Start> How are you? <END>". Decoder input and output follow this pattern. 
+We add two tokens to each input: A beginning-of-sequence token and an end-of-sequence token. Doing so gives model markers/ boundaries to avoid stopping too early or blabbering endless tokens. It helps inference, where the model outputs these tokens, which means the generation is over.
 
-First iteration="<START>" --> "How".
+The transformer predicts one token at a time. Suppose we have decoder input as "`<START>` How are you? `<END`". Decoder input and output follow this pattern. 
 
-Second Iteration="<START> How" --> "are". 
+First iteration="`<START>`" --> "How".
 
-Third Iteration ="<START> How are" --> "you?"
+Second Iteration=" `<START>` How" --> "are" 
 
-Fourth Iteration= "<START> How are you" -->""<END>"
+Third Iteration ="`<START>` How are" --> "you?"
 
-So, we need to shift our decoder output expectation to the right. Thus, we get for a token of 5, 4 examples.
+Fourth Iteration= "`<START>` How are you" -->" "`<END>`"
+
+So, we need to shift our decoder output expectation to the right. Thus, we get for a token of 5, 4 examples. This is called Shifted Inputs.
+
+### BLEU Score
+
+Machine translation can have multiple correct answers. The output may not be similar to the input with respect to the words and their positions, but that does not make it a bad translation. So, we calculate the precision by taking single, bigram, trigram, and tetragram pairs from the outputs. We then compare how many times each pair appears in our target. We have the number of times a pair appears in the target (clipped so that it does not exceed the denominator) divided by the number of times the pair appears in the prediction. The geometric mean is taken over the numbers received from all the pairs of different sizes. We also add a penalty if the length of the prediction is smaller than the length of the target.
 
