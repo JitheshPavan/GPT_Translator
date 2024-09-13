@@ -76,3 +76,29 @@ So, we need to shift our decoder output expectation to the right. Thus, we get f
 
 Machine translation can have multiple correct answers. The output may not be similar to the input with respect to the words and their positions, but that does not make it a bad translation. So, we calculate the precision by taking single, bigram, trigram, and tetragram pairs from the outputs. We then compare how many times each pair appears in our target. We have the number of times a pair appears in the target (clipped so that it does not exceed the denominator) divided by the number of times the pair appears in the prediction. The geometric mean is taken over the numbers received from all the pairs of different sizes. We also add a penalty if the length of the prediction is smaller than the length of the target.
 
+### Positional Encoding
+
+The attention mechanism is independent of the length of tokens; it is also independent of order. It cannot know the order of the tokens. Why is it so?
+
+1) The attention mechanism works on the embedding space, not the tokens. That is, throughout the ordeal, the last dimension is worked on. So, it works on every token independently, just like the batch size. Even at the end, the last neural network layer maps the embedding to vocabulary size done on the embedding dimension. That is why it is independent of the order. So, if you input two tokens to the decoder, it will output two tokens after having worked on both of these tokens independently. Now, you may think that since it works on both inputs independently, context is non-existent. But tokens do interact during the attention mechanism, and only during that mechanism. This fuels its infinite attention span. This interaction captures the relation between the tokens, not the order of the tokens.
+2) We use a positional encoding vector to capture the order of tokens. The positional encoding vector displaces the embedding vector in a certain direction. Thus, positional encoding can be thought of as an attempt to group the first tokens together. Thus, we have two opposing forces during encoding: embedding vector, which attempts to put similar vectors in a similar cluster, and positional encoding vector, which attempts to group tokens together based on their position. The positional embedding vector has to follow two properties.
+- it should not get large in magnitude as the number of tokens increases. This will cause the embedding vector to grow small in influence. 
+- The positional vector should not get smaller in magnitude as the token size increases; the embedding vector will overshadow the positional vector.
+3) The trigonometric functions sin follows the first property. But it is periodic. That is why we decrease its frequency to such a level that it does not repeat itself. But if you do that, it will slowly decrease on one end. That is why we alternate between cosine and sine functions. When the sin value is small, the cosine value is large, and vice-versa. Thus, the second option is satisfied.
+  
+- **Positional Encoding Equation:**
+  
+  \[
+  PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{\frac{2i}{d_{\text{model}}}}}\right)
+  \]
+  
+  \[
+  PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{\frac{2i}{d_{\text{model}}}}}\right)
+  \]
+
+Where:
+- `pos` is the position of the token in the sequence.
+- `i` is the dimension of the embedding.
+- `d_model` is the total dimensionality of the embeddings.            
+
+   
