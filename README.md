@@ -88,17 +88,20 @@ The attention mechanism is independent of the length of tokens; it is also indep
   
 - **Positional Encoding Equation:**
   
-  \[
-  PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{\frac{2i}{d_{\text{model}}}}}\right)
-  \]
-  
-  \[
-  PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{\frac{2i}{d_{\text{model}}}}}\right)
-  \]
-
+PE(pos, 2i) = sin(pos / 10000^(2i / d_model))
+PE(pos, 2i+1) = cos(pos / 10000^(2i / d_model))
 Where:
 - `pos` is the position of the token in the sequence.
 - `i` is the dimension of the embedding.
-- `d_model` is the total dimensionality of the embeddings.            
+- `d_model` is the total dimensionality of the embeddings.
 
-   
+**Note**
+- The frequency remains the same with changes in position. That is, we get a constant frequency wave in the direction of position.
+- For the direction in dimension, the value constantly decreases attempts to go to zero. Thus, we get a wave that is getting longer in frequency as we go deeper into the embedding dimension.
+- The larger the d_model value, the faster the change in frequency.
+
+Thus we have a plot like this
+
+<img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/scaling.png" width="800" height="500">
+
+How do we infer from this image? The usual sin wave is depicted in this image through colors. The light color represents the peak, and the dark color represents the negative peak. Now, if you look at the columns spacing between the same colors does not change, indicating no change in freq. Rowwise, the spacing increases the deeper you go, indicating an increase in frequency. Now, this change can be inferred as a decrease in magnitude for the sin wave, but since we are using the cos wave, alternatively, the effect is counteracted. This is why freq must change with dimension because the sin wave follows the cosine wave. if we do not change the frequency, the end value and the begging value come out the same.
