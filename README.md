@@ -2,8 +2,14 @@
 ## Training
 In the original paper, the authors used warmup steps during training. The output gradient from the transformer is large in magnitude. So, we use warmup to gradually build up to an LR so that that model can stabilize. But, if we shift the position of the Layernorm layer to pre-multi-head attention rather than the post-residual layer, gradients remain stable. So, you don't need a warmup. Note: both types of transformers can achieve the same accuracies. One is significantly faster.
 
-![](https://github.com/JitheshPavan/GPT_Translator/blob/main/data/loss.PNG)
-![](https://github.com/JitheshPavan/GPT_Translator/blob/main/data/acc.PNG)
+<p align="center">
+  <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/loss.png" width="400"/>
+  <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/bleu.png" width="400"/>
+</p>
+
+###Inference
+An example of successful translation is 'How are you,' translated to [wie,geht, es, dir]. 
+[what are you doing] translates to [was geht es gut], which, when translated back, means what is going well. This is a failed case. 
 
 ## Theory
 The most innovative concept introduced in Transformers was Attention. What is attention?  
