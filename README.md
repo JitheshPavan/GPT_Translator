@@ -6,7 +6,7 @@ In the original paper, the authors used warmup steps during training. The output
   <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/loss.png" width="400"/>
   <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/bleu.png" width="400"/>
 </p>
-
+number of parameters in my model is 32790680.
 ###Inference
 An example of successful translation is 'How are you,' translated to [wie,geht, es, dir]. 
 [what are you doing] translates to [was geht es gut], which, when translated back, means what is going well. This is a failed case. 
