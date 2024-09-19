@@ -1,5 +1,8 @@
 # GPT_Translator
+## Training
+In the original paper, the authors used warmup steps during training. The output gradient from the transformer is large in magnitude. So, we use warmup to gradually build up to an LR so that that model can stabilize. But, if we shift the position of the Layernorm layer to pre-multi-head attention rather than the post-residual layer, gradients remain stable. So, you don't need a warmup. Note: both types of transformers can achieve the same accuracies. One is significantly faster.
 
+## Theory
 The most innovative concept introduced in Transformers was Attention. What is attention?  
 Attention is used to capture the relations between different tokens or words in sequence. For example: "How are you?". Here, there are three tokens (3 words). Attention calculates the relations between these three tokens. Doing so can train it for different tasks, such as text generation. Attention works as follows.  
 
