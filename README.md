@@ -98,7 +98,7 @@ The attention mechanism is independent of the length of tokens; it is also indep
 2) We use a positional encoding vector to capture the order of tokens. The positional encoding vector displaces the embedding vector in a certain direction. Thus, positional encoding can be thought of as an attempt to group the first tokens together. Thus, we have two opposing forces during encoding: embedding vector, which attempts to put similar vectors in a similar cluster, and positional encoding vector, which attempts to group tokens together based on their position. The positional embedding vector has to follow two properties.
 - it should not get large in magnitude as the number of tokens increases. This will cause the embedding vector to grow small in influence. 
 - The positional vector should not get smaller in magnitude as the token size increases; the embedding vector will overshadow the positional vector.
-3) The trigonometric functions sin follows the first property. But it is periodic. That is why we decrease its frequency to such a level that it does not repeat itself. But if you do that, it will slowly decrease on one end. That is why we alternate between cosine and sine functions. When the sin value is small, the cosine value is large, and vice-versa. Thus, the second option is satisfied.
+3) The trigonometric functions sin follows the first property. But it is periodic. That is why we decrease its frequency to such a level that it does not repeat itself. But if you do that, it will slowly decrease on one end. That is why we alternate between cosine and sine functions. When the sin value is small, the cosine value is large, and vice-versa. So, the second option is actually satisfied.
   
 - **Positional Encoding Equation:**
   
@@ -111,7 +111,7 @@ Where:
 
 **Note**
 - The frequency remains the same with changes in position. That is, we get a constant frequency wave in the direction of position.
-- For the direction in dimension, the value constantly decreases attempts to go to zero. Thus, we get a wave that is getting longer in frequency as we go deeper into the embedding dimension.
+- The frequency decreases for the direction in dimension, leading to slower oscillations. Thus, we get a wave that is getting longer periods as we go deeper into the embedding dimension.
 - The larger the d_model value, the faster the change in frequency.
 
 Thus we have a plot like this
