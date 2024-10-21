@@ -1,10 +1,10 @@
-# GPT_Translator
+<h1 align="center"> GPT Translator </h1>
 
-[Training](##Training) 
+-[Training](#Training) 
 
-[Inference](###Inference)
-
-[Theory](##Theory)
+  -[Inference](#Inference)
+   
+-[Theory](#Theory)
 
 
 
