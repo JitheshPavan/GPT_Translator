@@ -1,17 +1,17 @@
 <h1 align="center"> GPT Translator </h1>
 
-- [Training](#training)
-  - [Inference](#inference)  <!-- Inference is now a sub-item of Training -->
-- [Theory](#theory)
-  - [Masking](#Masking)
-  - [MultiHead Attention](#MultiHead_Attention)
-  - [Transformer](#Transformer)
-    -[Encoder](#Encoder)
-    -[Decoder](#Decoder)
-  - [Learning Rate](#Learning_Rate)
-  - [Input](#Inputs)
-  - [BLEU Score](#BLEU_Score)
-  - [Positional Encoding](#Positional_Encoding)
+- [Training](#Training)
+  - [Inference](#Inference)
+- [Theory](#Theory)
+  - [Masking](#Masking)  <!-- Lowercase 'm' to match the section ID -->
+  - [MultiHead Attention](#MultiHead-Attention)  <!-- Match with the section header's ID -->
+  - [Transformer](#Transformer)  <!-- Lowercase 't' to match section ID -->
+    - [Encoder](#Encoder)  <!-- Space added, lowercase 'e' -->
+    - [Decoder](#Decoder)  <!-- Space added, lowercase 'd' -->
+  - [Learning Rate](#Learning-rate)  <!-- Lowercase, hyphen instead of underscore -->
+  - [Input](#Input)  <!-- Lowercase 'i' -->
+  - [BLEU Score](#BLEU-Score)  <!-- Lowercase, hyphen instead of underscore -->
+  - [Positional Encoding](#Positional-Encoding)  <!-- Lowercase, hyphen instead of underscore -->
 
 ## Training
 In the original paper, the authors used warmup steps during training. The output gradient from the transformer is large in magnitude. So, we use warmup to gradually build up to an LR so that that model can stabilize. But, if we shift the position of the Layernorm layer to pre-multi-head attention rather than the post-residual layer, gradients remain stable. So, you don't need a warmup. Note: both types of transformers can achieve the same accuracies. One is significantly faster.
@@ -85,7 +85,7 @@ The learning rate increases with warm-up steps and then gradually decreases. The
 With increased dimension of the model, the learning rate decreases. It decreases by 10 points for every 100 increase in dimension. 
 <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/learning_rate.png" width="800" height="500">
 
-### Inputs
+### Input
 We add two tokens to each input: A beginning-of-sequence token and an end-of-sequence token. Doing so gives model markers/ boundaries to avoid stopping too early or blabbering endless tokens. It helps inference, where the model outputs these tokens, which means the generation is over.
 
 The transformer predicts one token at a time. Suppose we have decoder input as "`<START>` How are you? `<END`". Decoder input and output follow this pattern. 
