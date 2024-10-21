@@ -14,7 +14,7 @@
   - [Positional Encoding](#Positional-Encoding)  <!-- Lowercase, hyphen instead of underscore -->
 
 ## Training
-In the original paper, the authors used warmup steps during training. The output gradient from the transformer is large in magnitude. So, we use warmup to gradually build up to an LR so that that model can stabilize. But, if we shift the position of the Layernorm layer to pre-multi-head attention rather than the post-residual layer, gradients remain stable. So, you don't need a warmup. Note: both types of transformers can achieve the same accuracies. One is significantly faster.
+In the original paper, the authors used warmup steps during training. The output gradients of the original transformer are huge. So, we use warmup to gradually build up to the learning rate so that that model can stabilize. But, if we shift the position of the Layernorm layer to behind the multi-head attention rather than after the residual layer, gradients remain stable. So you don't need a warmup for the latter. Note: both types of transformers can achieve the same accuracies. One is significantly faster.
 
 <p align="center">
   <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/loss.png" width="400"/>
