@@ -5,14 +5,6 @@ import torch.nn.functional as F
 
 """# Model"""
 
-#Hyperparameters
-d_model= 512 # This is embedding dimension. n_embed
-d_ff  = 4* d_model # Inner dimension of the FFNN layer. It is 2048 in the paper.
-max_length= 50  # Max sequence length allowed.
-# vocab_size =
-#n_layers =
-#rate =
-
 
 
 class MultiHeadAttention(nn.Module):
@@ -185,3 +177,28 @@ class Transformer(nn.Module):
   def look_ahead_mask(self,shape):
     x=torch.triu(torch.ones((shape,shape)),diagonal=1)
     return x.type(torch.float32)
+
+
+if __name__ == "__main__":
+    # Example usage
+    enc_vocab_size = 10000
+    dec_vocab_size = 10000
+    enc_seq_len = 50
+    dec_seq_len = 50
+    d_model = 512
+    h = 8
+    d_k = 64
+    d_v = 64
+    d_ff = 2048
+    n_layers = 6
+    rate = 0.1
+
+    transformer = Transformer(enc_vocab_size, dec_vocab_size, enc_seq_len, dec_seq_len, d_model, h, d_k, d_v, d_ff, n_layers, rate)
+    
+    # Dummy data
+    encoder_input = torch.randint(0, enc_vocab_size, (1, enc_seq_len))
+    decoder_input = torch.randint(0, dec_vocab_size, (1, dec_seq_len))
+    
+    # Forward pass
+    output = transformer(encoder_input, decoder_input)
+    print(output.shape)  # Should print (1, dec_seq_len, dec_vocab_size)
