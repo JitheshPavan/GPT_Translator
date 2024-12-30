@@ -1,4 +1,9 @@
 <h1 align="center"> GPT Translator </h1>
+Implementing transformer Architecture from scratch in PyTorch as given in the paper- "Attention is all you need"
+
+The model code with comments can be found in the model folder.
+
+The training script is found in the GPT notebook.
 
 - [Training](#Training)
   - [Inference](#Inference)
