@@ -63,16 +63,16 @@ Is not the combination of every dimension with the same weights undesirable? Yes
 
 Unique problems faced in Natural Language Processing (NLP) are complexities of language, such as grammar and varying sentence length. Transformers were designed to address this problem.
 
-1)Every operation except attention is applied to the token independently. These operations work on the embedding dimension of the token. Embedding dimension size is constant; therefore, this usual neural network layer can be used here. 
+1)Every operation except attention is applied to the tokens independently of each other. These operations work on the embedding dimension of the token. The embedding dimension size is constant; therefore, the usual neural network layers can be used here. 
 
-2)The attention mechanism is a form of inner product. This operation is defined only if the number of columns in the first matrix and the number of rows in the second matrix are equal to the size of the embedding dimension. The number of tokens constitutes the variables. Therefore, the attention mechanism is independent of the number of tokens. Thus, this operation allows token communication while independent of the token count.
+2)The attention mechanism is a form of inner product. This operation is defined because the number of columns in the first matrix and the number of rows in the second matrix are equal. No constraint is placed on the number of tokens. Therefore, the attention mechanism is independent of the number of tokens. 
 
 ## Masking
 1) Although the transformer can handle different sequence lengths, it is advisable to use the same sequence length in a batch; this makes it easier to train it using GPUs. Such a padded sequence should not be considered, so we introduce padding_mask. This is after the Q.dot(K) mechanism sets all the padded values in the sequence to -infinity. The exponential of -infinity is zero, thus removing it from softmax calculations. 
 
 2) "Look-Ahead Mask"-->This preserves auto-regressive property. The transformer generates a new token for every turn during inference or generation. The transformer( decoder in particular) can only access the tokens it has generated before. This property must be mimicked during training, so we added a look-ahead mask. During the output calculations, queries should not access any keys of the future token. So, we add a look-ahead mask. The upper triangular mask with infinity for every non-zero value acts as the mask. The look-ahead mask remains an upper triangular matrix, but the size increases with every new token generation. The token generated is added to the input during the next generation cycle.
 
-3) The encoder only requires a padding mask. In a Decoderblock, the first Attention block requires a look_ahead and padded mask. The second block requires only a padded mask. A look-ahead mask should not be used because keys come from the encoder. Let us use the machine translation task to understand this- Transformer will always have access to the complete sentence that needs to be translated. This sentence is fed into the encoder.
+3) The encoder only requires a padding mask. In a Decoderblock, the first Attention block requires a look_ahead and padded mask. The second block requires only a padded mask. A look-ahead mask should not be used because keys come from the encoder. This can be understood in the context of Machine Translation, as the transformer will always have access to the complete sentence that needs to be translated. This sentence is fed into the encoder.
 
 What does a look_ahead mask + padding mask look like?
 Ex: sequence=[1,2,0,0,0] , then mask will look like=[[T1,T2,0 0,0],[T3,T2,0,0,0],-----]. This mask is used during the first Attention block in the Decoder
