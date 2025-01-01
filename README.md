@@ -1,5 +1,5 @@
-<h1 align="center"> GPT Translator </h1>
-Implementing transformer Architecture from scratch in PyTorch as given in the paper- "Attention Is All You Need": [Paper](https://arxiv.org/abs/1706.03762)
+# GPT Translator 
+Implementing transformer Architecture from scratch in PyTorch as given in the paper- ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)
 
 # Script
 In the model folder, the model is explained with detailed comments.
