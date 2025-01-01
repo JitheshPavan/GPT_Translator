@@ -34,6 +34,7 @@ An example of successful translation is 'How are you,' translated to [wie,geht, 
 A failed case: [what are you doing] translates to [was geht es gut], which, when translated back, means "what is going well".
 
 ## Theory
+### Attention
 The most innovative concept introduced in Transformers was Attention. What is attention?  
 Attention is used to capture the relations between different tokens or words in sequence. For example: "How are you?". Here, there are three tokens (3 words). Attention calculates the relations between these three tokens. Doing so can train it for different tasks, such as text generation. Attention works as follows.  
 
@@ -56,8 +57,15 @@ Attention is used to capture the relations between different tokens or words in 
 - How do different sequence lengths come into the picture? One sequence functions as the query, and one as the keys. [T1,E] * [E,T2] ==> [T1,T2]. Then [T1,T2] * [T2,E] ==> [T1,E]. Thus, the T1 is preserved. To preserve the output dimension, the sequence provides the values and keys matrix, which acts as the context or encoder rather than the decoder.  
 - Why individual scalar values of vector? Why not a combination of the values vector itself? Such a combination is incapable of accessing the whole embedding space. If there are two tokens, it can access only a plane (called column space of the matrix).  
 <!--- 
-Is not the combination of every dimension with the same weights undesirable? Yes.  ; Why have a values vector? Why not do the linear combination of the vectors itself? Attention * X instead of V?
+Is not the combination of every dimension with the same weights undesirable? Yes.  ;    Why have a values vector? Why not do the linear combination of the vectors itself? Attention * X instead of V?
 --->
+### Why Transformer works
+
+Unique problems faced in Natural Language Processing (NLP) are complexities of language, such as grammar and varying sentence length. Transformers were designed to address this problem.
+
+1)Every operation except attention is applied to the token independently. These operations work on the embedding dimension of the token. Embedding dimension size is constant; therefore, this usual neural network layer can be used here. 
+
+2)The attention mechanism is a form of inner product. This operation is defined only if the number of columns in the first matrix and the number of rows in the second matrix are equal to the size of the embedding dimension. The number of tokens constitutes the variables. Therefore, the attention mechanism is independent of the number of tokens. Thus, this operation allows token communication while independent of the token count.
 
 ## Masking
 1) Although the transformer can handle different sequence lengths, it is advisable to use the same sequence length in a batch; this makes it easier to train it using GPUs. Such a padded sequence should not be considered, so we introduce padding_mask. This is after the Q.dot(K) mechanism sets all the padded values in the sequence to -infinity. The exponential of -infinity is zero, thus removing it from softmax calculations. 
