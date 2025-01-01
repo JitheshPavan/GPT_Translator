@@ -3,6 +3,7 @@ Implementing transformer Architecture from scratch in PyTorch as given in the pa
 
 # Script
 In the model folder, the model is explained with detailed comments.
+
 Pre_LN_Transformer is a complete script with training 
 
 - [Training](#Training)
@@ -30,7 +31,7 @@ number of parameters in my model is 32790680.
 ### Inference
 An example of successful translation is 'How are you,' translated to [wie,geht, es, dir]. 
 
-[what are you doing] translates to [was geht es gut], which, when translated back, means what is going well. This is a failed case. 
+A failed case: [what are you doing] translates to [was geht es gut], which, when translated back, means "what is going well".
 
 ## Theory
 The most innovative concept introduced in Transformers was Attention. What is attention?  
