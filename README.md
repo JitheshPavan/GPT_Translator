@@ -9,7 +9,9 @@ Pre_LN_Transformer is a complete script with training
 - [Training](#Training)
   - [Inference](#Inference)
 - [Theory](#Theory)
-  - [Masking](#Masking)  <!-- Lowercase 'm' to match the section ID -->
+  - [Attention](#Attention)
+  - [Why Transformer Works](#Why-Transformer-works)
+  - [Masking](#Masking)  
   - [MultiHead Attention](#MultiHead-Attention)  <!-- Match with the section header's ID -->
   - [Transformer](#Transformer)  <!-- Lowercase 't' to match section ID -->
     - [Encoder](#Encoder)  <!-- Space added, lowercase 'e' -->
