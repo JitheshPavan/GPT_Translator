@@ -35,6 +35,10 @@ A failed case: [what are you doing] translates to [was geht es gut], which, when
 
 ## Theory
 ### Attention
+<p align="center">
+  <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/attention.png" />
+</p>
+
 The most innovative concept introduced in Transformers was Attention. What is attention?  
 Attention is used to capture the relations between different tokens or words in sequence. For example: "How are you?". Here, there are three tokens (3 words). Attention calculates the relations between these three tokens. Doing so can train it for different tasks, such as text generation. Attention works as follows.  
 
@@ -83,6 +87,10 @@ MultiHead Attention, as the name suggests, multiple attention is done in paralle
 Thus, with the same computational complexity, we can capture context many times. At the end, the output matrices are combined to achieve the same output. The main point is that K, Q, and V are indexed in the embedding dim, not the context/time/token dimension. This preserves the ability to access every context.
 
 ## Transformer
+<p align="center">
+  <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/transformer.png" width="400" />
+</p>
+<p align="center"><i>Transformer architecture</i></p>
 
 ### Encoder
 The encoder consists of attention and FFNN with residual and layer norm connections. We start with the attention block, which acts as the residual input to the input. Layernorm is applied to the output(x+attention(x)). Then, FFNN is applied as another residual connection with another layer of the norm layer at the end. The FFNN consists of two linear layers. One maps emb_dim to 4* emb_dim, and the layer maps it back to the original dimension. The encoder part is used for the input if we have eng to ger translation. Eng sentence is the input to Encoder. The encoder thus does not require a look_ahead mask as the whole eng sentence should be accessed for translation in every German token generation. Dropout is added after every sub-layer, after the attention and FFNN layer.
