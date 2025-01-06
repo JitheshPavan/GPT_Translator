@@ -2,9 +2,11 @@
 Implementing transformer Architecture from scratch in PyTorch as given in the paper- ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)
 
 # Script
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/JitheshPavan/GPT_Translator/blob/main/Pre_LN_Transformer.ipynb)
+
 In the model folder, the model is explained with detailed comments.
 
-Pre_LN_Transformer is a complete script with training 
+Pre_LN_Transformer is a complete script with training. 
 
 - [Training](#Training)
   - [Inference](#Inference)
