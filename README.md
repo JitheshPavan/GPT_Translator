@@ -1,6 +1,10 @@
 # GPT Translator 
 Implementing transformer Architecture from scratch in PyTorch as given in the paper- ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)
 
+I have published a blog on transformers explaining things I learned from this project. [Link](https://medium.com/@jitheshdsouza19/decoding-transformers-how-attention-makes-them-work-4a91a3fe2371)
+
+Check it out to understand how attention works and to know about technical details of simple transformer training. 
+
 # Script
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/JitheshPavan/GPT_Translator/blob/main/Pre_LN_Transformer.ipynb)
 
@@ -15,7 +19,7 @@ In the original paper, the authors used warmup steps during training. The output
   <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/loss.png" width="400"/>
   <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/bleu.png" width="400"/>
 </p>
-number of parameters in my model is 32790680.
+number of parameters in my model is 3,27,90,680.
 
 ### Inference
 An example of successful translation is 'How are you,' translated to [wie,geht, es, dir]. 
