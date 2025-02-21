@@ -1,7 +1,7 @@
 # GPT Translator 
 Implementing transformer Architecture from scratch in PyTorch as given in the paper- ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)
 
-I have published a blog on transformers explaining things I learned from this project. [Link](https://medium.com/@jitheshdsouza19/decoding-transformers-how-attention-makes-them-work-4a91a3fe2371)
+I have published a blog on transformers explaining things I learned from this project. [Medium Blog](https://medium.com/@jitheshdsouza19/decoding-transformers-how-attention-makes-them-work-4a91a3fe2371)
 
 Check it out to understand how attention works and to know about technical details of simple transformer training.
 
