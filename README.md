@@ -8,12 +8,12 @@ Check it out to understand how attention works and to know about technical detai
 # Script
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/JitheshPavan/GPT_Translator/blob/main/Pre_LN_Transformer.ipynb)
 
-In the model folder, the model is explained with detailed comments.
+If you want the model code with explanation check out files in model folder. 
 
-Pre_LN_Transformer is a complete script with training. 
+Pre_LN_Transformer is the complete script with training. 
 
 ## Training
-In the original paper, the authors used warmup steps during training. The output gradients of the original transformer are huge. So, we use warmup to gradually build up to the learning rate so that that model can stabilize. But, if we shift the position of the Layernorm layer to behind the multi-head attention rather than after the residual layer, gradients remain stable. So you don't need a warmup for the latter. Note: both types of transformers can achieve the same accuracies. One is significantly faster.
+In the original paper, the authors used warmup steps during training. The output gradients of the original transformer are huge. So, we use warmup to gradually build up to the learning rate so that that model gradients can stabilize. But, if we shift the position of the Layernorm layer to the behind of multi-head attention layer rather than after the residual layer, gradients remain stable. So you don't need a warmup for the latter. Note: both types of transformers can achieve the same accuracies. One is significantly faster. 
 
 <p align="center">
   <img src="https://github.com/JitheshPavan/GPT_Translator/blob/main/data/loss.png" width="400"/>
